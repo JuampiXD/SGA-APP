@@ -1,0 +1,85 @@
+name: sga
+description: A new Flutter project.
+
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.6 <3.0.0"
+
+flutter_icons:
+  image_path: 'images/logo.png'
+  ios: true
+  android: true
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  flutter_native_splash: ^2.1.6
+  animate_do: ^2.1.0
+  provider: ^6.0.2
+  sizer: ^2.0.15
+  graphql_flutter: ^5.1.0
+  http: ^0.13.4
+  page_transition: ^2.0.9
+  flutter_keyboard_visibility: ^5.3.0
+  flutter_launcher_icons: ^0.10.0
+  form_field_validator: ^1.1.0
+  shared_preferences: ^2.0.15
+  bottom_bar: ^2.0.2
+  accordion: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+
+flutter:
+
+  fonts:
+    - family: RobotoBlack
+      fonts:
+        - asset: fonts/Roboto-Black.ttf
+
+    - family: RobotoBlackItalic
+      fonts:
+        - asset: fonts/Roboto-BlackItalic.ttf
+
+    - family: RobotoBold
+      fonts:
+        - asset: fonts/Roboto-Bold.ttf
+
+    - family: RobotoItalic
+      fonts:
+        - asset: fonts/Roboto-Italic.ttf
+
+    - family: RobotoLight
+      fonts:
+        - asset: fonts/Roboto-Light.ttf
+
+    - family: RobotoMedium
+      fonts:
+        - asset: fonts/Roboto-Medium.ttf
+
+    - family: RobotoRegular
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+
+    - family: RobotoThin
+      fonts:
+        - asset: fonts/Roboto-Thin.ttf
+
+  uses-material-design: true
+  assets:
+    - images/
+
+flutter_native_splash:
+  color: "FEF8E6"
