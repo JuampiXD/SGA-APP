@@ -1,11 +1,11 @@
 import 'package:bottom_bar/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sga/assistance/assistance_page.dart';
 import 'package:sga/pages/course/course_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../tools/exit_dialog_box.dart';
+import 'assistance/prueba_accordion.dart';
 
 class HomePage extends StatefulWidget {
   String email;
@@ -43,15 +43,14 @@ class _HomePageState extends State<HomePage> {
         return false;
       },
       child: Scaffold(
-
         extendBodyBehindAppBar: true,
         backgroundColor: Colors.white,
         body: PageView(
           physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: [
-           CoursePage(email:widget.email),
-            AssistancePage(email: widget.email),
+            CoursePage(email: widget.email),
+            AccordionApp(email: widget.email),
             Container(color: Colors.brown),
           ],
           onPageChanged: (index) {
@@ -59,6 +58,7 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         bottomNavigationBar: BottomBar(
+          padding: EdgeInsets.only(top: 1.h, bottom: 3.h),
           duration: const Duration(milliseconds: 300),
           backgroundColor: Colors.white,
           textStyle: const TextStyle(fontWeight: FontWeight.bold),
