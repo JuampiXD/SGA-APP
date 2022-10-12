@@ -11,11 +11,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:http/http.dart' as http;
 import '../graphql/GraphQLConfig.dart';
+import '../graphql/model/objetos.dart';
 import '../tools/fail_connection.dart';
 import 'home_page.dart';
 
 int versionLocal = 2;
-int versionActual=1;
+int versionActual = 1;
 late Future<int> futureVersion;
 Widget siguiente = Container();
 
@@ -35,22 +36,24 @@ Future<int> fetchVersion() async {
 }
 
 class SplashPage extends StatefulWidget {
-
-
   @override
   _SplashPageState createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
-
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-  late Future<String> _email;
+  late Future<User> _user;
 
   @override
   void initState() {
-    _email = _prefs.then((SharedPreferences prefs) {
+    _user = _prefs.then((SharedPreferences prefs) {
 
-      return prefs.getString('email') ?? "No";
+      return User(
+          prefs.getString('firstName') ?? "No",
+          prefs.getString('lastName') ?? "No",
+          prefs.getString('password') ?? "No",
+          prefs.getString('email') ?? "No",
+          prefs.getString('rol') ?? "No");
     });
 
     super.initState();
@@ -76,22 +79,23 @@ class _SplashPageState extends State<SplashPage> {
         const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
     return Scaffold(
       backgroundColor: Colors.white,
-      body:  FutureBuilder<int>(
+      body: FutureBuilder<int>(
         future: futureVersion,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             if (versionLocal < snapshot.data!) {
               siguiente = VersionPage(versionLocal, snapshot.data!);
             } else {
-              siguiente = FutureBuilder<String>(
-                future: _email,
+              siguiente = FutureBuilder<User>(
+                future: _user,
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    if (snapshot.data=="No") {
-                      return  RegisterPage();
+                    if (snapshot.data?.email == "No") {
+                      return RegisterPage();
                     } else {
-
-                      return HomePage(email:  snapshot.data!,);
+                      return HomePage(
+                        usuario: snapshot.data!,
+                      );
                     }
                   } else {
                     return const Fail_Connection(
@@ -112,7 +116,7 @@ class _SplashPageState extends State<SplashPage> {
                 child: FadeInDownBig(
                   child: SizedBox(
                     width: 100.w,
-                    child:Image.asset(
+                    child: Image.asset(
                       "images/app.png",
                     ),
                   ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:sga/pages/home_page.dart';
+import 'package:sga/pages/register_page.dart';
 import 'package:sga/pages/splash_page.dart';
 import 'package:sizer/sizer.dart';
 
@@ -77,7 +78,7 @@ class _MyAppState extends State<MyApp> {
           return GraphQLProvider(
               client: GraphQLConfiguration.clientToQuery(),
               child:
-               HomePage(email: 'cuellarrojasuwil@gmail.com',)
+               RegisterPage()
             //AgreementPage(telefono: "78447689", carnet: "9768790")
             //HomePage(telefono: "78447689", carnet: "9768790"),
             //Congratulation(telefono: "78447689", carnet: "9768790"),

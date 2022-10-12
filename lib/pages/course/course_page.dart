@@ -10,9 +10,9 @@ import '../../tools/fail_connection.dart';
 import '../../tools/loading.dart';
 
 class CoursePage extends StatefulWidget {
-  String email;
+  User Usuario;
 
-  CoursePage({required this.email});
+  CoursePage({required this.Usuario});
 
   @override
   State<CoursePage> createState() => _CoursePageState();
@@ -25,7 +25,7 @@ class _CoursePageState extends State<CoursePage> {
       client: GraphQLConfiguration.clientToQuery(),
       child: Query(
           options: QueryOptions(
-              document: gql(QueryCollections().getClassmates(widget.email))),
+              document: gql(QueryCollections().getClassmates(widget.Usuario.email))),
           builder: (QueryResult result, {refetch, fetchMore}) {
             if (result.hasException) {
               return const Fail_Connection(

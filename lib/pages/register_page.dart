@@ -1,18 +1,21 @@
-import 'package:animate_do/animate_do.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:sga/graphql/model/objetos.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:http/http.dart' as http;
+import '../graphql/GraphQLConfig.dart';
 import '../tools/exit_dialog_box.dart';
 import 'home_page.dart';
 
 class RegisterPage extends StatelessWidget {
-   RegisterPage({Key? key}) : super(key: key);
+  RegisterPage({Key? key}) : super(key: key);
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -26,11 +29,45 @@ class RegisterPage extends StatelessWidget {
     final passwordController = TextEditingController();
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+    Future<User> login() async {
+      var headers = {'Authorization': GraphQLConfiguration.authLink.toString()};
 
-    void verificacion()async{
+      var request = http.Request(
+          'GET',
+          Uri.parse(
+              '${GraphQLConfiguration.getHost()}/api/usuarios?filters[email]['
+                      r'$eq]=' +
+                  emailController.text));
+
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
+      User usuario = User("firstName", "lastName", "password", "email", "rol");
+      if (response.statusCode == 200) {
+        String x = "";
+        x =await response.stream.bytesToString() ;
+
+
+        usuario = User(
+            jsonDecode(x)["data"][0]["attributes"]["firstName"],
+            jsonDecode(x)["data"][0]["attributes"]["lastName"],
+            jsonDecode(x)["data"][0]["attributes"]["password"],
+            jsonDecode(x)["data"][0]["attributes"]["email"],
+            jsonDecode(x)["data"][0]["attributes"]["rol"]);
+      }
+
+      return usuario;
+    }
+
+    void guardar(User usuario) async {
+
 
       final SharedPreferences prefs = await _prefs;
-      await prefs.setString('email', emailController.text);
+      await prefs.setString('email', usuario.email);
+      await prefs.setString('password', usuario.password);
+      await prefs.setString('firstName', usuario.firstName);
+      await prefs.setString('lastName', usuario.lastName);
+      await prefs.setString('rol', usuario.rol);
 
       Navigator.pushReplacement(
           context,
@@ -38,8 +75,7 @@ class RegisterPage extends StatelessWidget {
               type: PageTransitionType.bottomToTop,
               alignment: Alignment.center,
               duration: const Duration(milliseconds: 500),
-              child:  HomePage(email: emailController.text)));
-
+              child: HomePage(usuario: usuario)));
     }
 
     Widget formularioRegister() {
@@ -151,17 +187,8 @@ class RegisterPage extends StatelessWidget {
                   margin: EdgeInsets.only(left: 12.h, right: 12.h, top: 4.h),
                   child: ElevatedButton(
                       autofocus: true,
-                      onPressed: () {
-
-
-
-
-
-
+                      onPressed: () async {
                         if (formKey.currentState!.validate()) {
-
-
-
                           showDialog(
                             context: context,
                             builder: (ctx) => AlertDialog(
@@ -187,11 +214,14 @@ class RegisterPage extends StatelessWidget {
                             ),
                           );
 
+                          User usuario =await login();
 
-                          // Falta Verificacion
-
-                        verificacion();
-
+                          if (usuario !=
+                                  User("firstName", "lastName", "password",
+                                      "email", "rol") ||
+                              usuario.password == passwordController.text) {
+                            guardar(usuario);
+                          }
                         }
                       },
                       style: ElevatedButton.styleFrom(

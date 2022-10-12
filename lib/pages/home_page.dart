@@ -1,24 +1,25 @@
 import 'package:bottom_bar/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sga/graphql/model/objetos.dart';
+import 'package:sga/pages/assistance/assistance_page.dart';
 import 'package:sga/pages/course/course_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../tools/exit_dialog_box.dart';
-import 'assistance/prueba_accordion.dart';
 
 class HomePage extends StatefulWidget {
-  String email;
+  User usuario;
 
-  HomePage({required this.email});
+  HomePage({required this.usuario});
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentPage = 1;
-  final PageController _pageController = PageController(initialPage: 1);
+  int _currentPage = 0;
+  final PageController _pageController = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +50,17 @@ class _HomePageState extends State<HomePage> {
           physics: const NeverScrollableScrollPhysics(),
           controller: _pageController,
           children: [
-            CoursePage(email: widget.email),
-            AccordionApp(email: widget.email),
-            Container(color: Colors.brown),
+
+            AssistancePage(usuario: widget.usuario),
+            CoursePage(Usuario: widget.usuario),
+
           ],
           onPageChanged: (index) {
             setState(() => _currentPage = index);
           },
         ),
         bottomNavigationBar: BottomBar(
-          padding: EdgeInsets.only(top: 1.h, bottom: 3.h),
+          padding: EdgeInsets.only( bottom: 3.h,left: 10.w,right: 10.w,top: 3.h),
           duration: const Duration(milliseconds: 300),
           backgroundColor: Colors.white,
           textStyle: const TextStyle(fontWeight: FontWeight.bold),
@@ -71,13 +73,6 @@ class _HomePageState extends State<HomePage> {
           },
           items: const [
             BottomBarItem(
-                icon: Icon(Icons.school),
-                backgroundColorOpacity: 1,
-                activeTitleColor: Colors.white,
-                title: Text("Mi Curso"),
-                activeColor: Color(0xff4c142c),
-                activeIconColor: Colors.white),
-            BottomBarItem(
                 icon: Icon(Icons.assignment_outlined),
                 backgroundColorOpacity: 1,
                 activeTitleColor: Colors.white,
@@ -85,12 +80,14 @@ class _HomePageState extends State<HomePage> {
                 activeColor: Color(0xff4c142c),
                 activeIconColor: Colors.white),
             BottomBarItem(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.school),
                 backgroundColorOpacity: 1,
                 activeTitleColor: Colors.white,
-                title: Text("Mi Perfil"),
+                title: Text("Mi Curso"),
                 activeColor: Color(0xff4c142c),
                 activeIconColor: Colors.white),
+
+
           ],
         ),
       ),
