@@ -47,13 +47,18 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     _user = _prefs.then((SharedPreferences prefs) {
-
       return User(
-          prefs.getString('firstName') ?? "No",
-          prefs.getString('lastName') ?? "No",
-          prefs.getString('password') ?? "No",
-          prefs.getString('email') ?? "No",
-          prefs.getString('rol') ?? "No");
+        prefs.getString('firstName') ?? "No",
+        prefs.getString('lastNameF') ?? "No",
+        prefs.getString('lastNameM') ?? "No",
+        prefs.getString('password') ?? "No",
+        prefs.getString('email') ?? "No",
+        prefs.getString('rol') ?? "No",
+        prefs.getString('alergias') ?? "No",
+        prefs.getString('tipodeSangre') ?? "No",
+        prefs.getString('factorRh') ?? "No",
+        prefs.getString('chapadeGuerra') ?? "No",
+      );
     });
 
     super.initState();

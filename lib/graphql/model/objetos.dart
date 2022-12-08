@@ -10,11 +10,11 @@ class Course {
 }
 
 class Classmate {
-  Classmate(this.firstName, this.lastName,this.email);
+  Classmate(this.firstName,  this.lastNameF,this.lastNameM);
 
   final String firstName;
-  final String lastName;
-  final String email;
+  final String lastNameF;
+  final String lastNameM;
 }
 
 class Assitance {
@@ -26,20 +26,26 @@ class Assitance {
 }
 
 class DetailsAssitance {
-  DetailsAssitance(this.firstName, this.lastName,this.details);
+  DetailsAssitance(this.firstName, this.lastNameF,this.lastNameM,this.details);
 
   final String firstName;
-  final String lastName;
+  final String lastNameF;
+  final String lastNameM;
   final String details;
 }
 
 class User {
-  User(this.firstName, this.lastName,this.password,this.email,this.rol);
-  String firstName;
-  String lastName;
-  String password;
-  String email;
-  String rol;
+  User(this.firstName, this.lastNameF,this.lastNameM,this.password,this.email,this.rol,this.alergias,this.sangre,this.factor,this.chapa);
+  final String firstName;
+  final  String lastNameF;
+  final String lastNameM;
+  final String password;
+  final String email;
+  final String rol;
+  final String alergias;
+  final String sangre;
+  final String factor;
+  final String chapa;
 }
 
 

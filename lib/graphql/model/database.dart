@@ -31,7 +31,8 @@ class DataBase {
       for (var element in element) {
         resultado.add(DetailsAssitance(
             element["usuario"]["data"]["attributes"]["firstName"],
-            element["usuario"]["data"]["attributes"]["lastName"],
+            element["usuario"]["data"]["attributes"]["lastNameF"],
+            element["usuario"]["data"]["attributes"]["lastNameM"],
             element["detalle"]));
       }
 
@@ -45,7 +46,7 @@ class DataBase {
     for (var element in data) {
       resultado.add(Assitance(
           element["attributes"]["name"],
-          element["attributes"]["createdAt"],
+          element["attributes"]["date"],
           detailsFormat(element["attributes"]["asistencia"])));
     }
 
@@ -60,10 +61,21 @@ class DataBase {
     for (var element in data) {
       resultado.add(User(
           element["attributes"]["firstName"],
-          element["attributes"]["lastName"],
+          element["attributes"]["lastNameF"],
+          element["attributes"]["lastNameM"],
           element["attributes"]["password"],
           element["attributes"]["email"],
-          element["attributes"]["rol"]));
+          element["attributes"]["rol"],
+          element["attributes"]["alergias"],
+          element["attributes"]["tipodeSangre"],
+          element["attributes"]["factorRh"],
+
+
+          element["attributes"]["chapadeGuerra"]
+
+
+
+      ));
     }
 
     return resultado.first;

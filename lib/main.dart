@@ -79,9 +79,7 @@ class _MyAppState extends State<MyApp> {
               client: GraphQLConfiguration.clientToQuery(),
               child:
                RegisterPage()
-            //AgreementPage(telefono: "78447689", carnet: "9768790")
-            //HomePage(telefono: "78447689", carnet: "9768790"),
-            //Congratulation(telefono: "78447689", carnet: "9768790"),
+
           );
         }));
   }

@@ -15,14 +15,13 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 4.h),
-      height: 30.h,
+      margin: EdgeInsets.only(top: 4.h),
+      height: 28.h,
       width: 100.w,
       child: Row(
         children: [
-          Container(
+          SizedBox(
             width: 40.w,
-            height: 30.h,
             child: Center(
               child: CircleAvatar(
                 radius: 15.w,
@@ -41,12 +40,19 @@ class _ProfilePageState extends State<ProfilePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${widget.usuario.firstName} ${widget.usuario.lastName}",
-                      textScaleFactor: 1.5,
+                      "${widget.usuario.firstName} ${widget.usuario.lastNameF} ${widget.usuario.lastNameM} ",
+                      textScaleFactor: 1.4,
                       style: const TextStyle(fontFamily: "RobotoBold"),
                     ),
                     SizedBox(
-                      height: 2.h,
+                      height: 1.h,
+                    ),
+                    Text(
+                      widget.usuario.chapa + " - "+ widget.usuario.sangre+widget.usuario.factor,
+                      style: const TextStyle(fontFamily: "RobotoMedium"),
+                    ),
+                    SizedBox(
+                      height: 1.h,
                     ),
                     Text(
                       widget.usuario.email,

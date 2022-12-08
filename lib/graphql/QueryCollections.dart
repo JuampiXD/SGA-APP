@@ -1,5 +1,4 @@
 class QueryCollections {
-
   String getClassmates(String email) {
     return """ 
 query {
@@ -13,8 +12,8 @@ query {
           data{
             attributes{
               firstName
-              lastName
-              email
+              lastNameF
+              lastNameM
             }
           }
         }
@@ -25,33 +24,26 @@ query {
   """;
   }
 
-
-
-
-
-
   String getInfoUsers(String email) {
     return """ 
-    
-    
-    
 query {
   assistances(
     filters: {
-      asistencia: { usuario: { email: { eq:  "$email" } } }
+      asistencia: { usuario: { email: { eq: "$email" } } }
     }
   ) {
     data {
       attributes {
         name
-        createdAt
+        date
         asistencia {
           detalle
           usuario {
             data {
               attributes {
                 firstName
-                lastName
+                lastNameF
+                lastNameM
               }
             }
           }
@@ -59,31 +51,25 @@ query {
       }
     }
   }
-  
-    usuarios(filters: { email: { eq:  "$email"} }) {
+
+  usuarios(filters: { email: { eq: "$email" } }) {
     data {
       attributes {
         firstName
-        lastName
+        lastNameF
+        lastNameM
         password
-        rol
         email
+        rol
+        alergias
+        tipodeSangre
+        factorRh
+        chapadeGuerra
       }
     }
   }
-  
 }
 
-    
-    
-    
   """;
   }
-
-
-
-
-
 }
-
-

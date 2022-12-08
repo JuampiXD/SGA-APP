@@ -39,35 +39,47 @@ class RegisterPage extends StatelessWidget {
                       r'$eq]=' +
                   emailController.text));
 
+
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
-      User usuario = User("firstName", "lastName", "password", "email", "rol");
+      User usuario = User("firstName", "lastNameF", "lastNameM", "password",
+          "email", "rol", "alergias", "sangre", "factor", "chapa");
       if (response.statusCode == 200) {
-        String x = "";
-        x =await response.stream.bytesToString() ;
 
+        String x = "";
+        x = await response.stream.bytesToString();
 
         usuario = User(
             jsonDecode(x)["data"][0]["attributes"]["firstName"],
-            jsonDecode(x)["data"][0]["attributes"]["lastName"],
+            jsonDecode(x)["data"][0]["attributes"]["lastNameF"],
+            jsonDecode(x)["data"][0]["attributes"]["lastNameM"],
             jsonDecode(x)["data"][0]["attributes"]["password"],
             jsonDecode(x)["data"][0]["attributes"]["email"],
-            jsonDecode(x)["data"][0]["attributes"]["rol"]);
+            jsonDecode(x)["data"][0]["attributes"]["rol"],
+            jsonDecode(x)["data"][0]["attributes"]["alergias"],
+            jsonDecode(x)["data"][0]["attributes"]["tipodeSangre"],
+            jsonDecode(x)["data"][0]["attributes"]["factorRh"],
+            jsonDecode(x)["data"][0]["attributes"]["chapadeGuerra"] );
+
+
       }
 
       return usuario;
     }
 
     void guardar(User usuario) async {
-
-
       final SharedPreferences prefs = await _prefs;
-      await prefs.setString('email', usuario.email);
-      await prefs.setString('password', usuario.password);
       await prefs.setString('firstName', usuario.firstName);
-      await prefs.setString('lastName', usuario.lastName);
+      await prefs.setString('lastNameF', usuario.lastNameF);
+      await prefs.setString('lastNameM', usuario.lastNameM);
+      await prefs.setString('password', usuario.password);
+      await prefs.setString('email', usuario.email);
       await prefs.setString('rol', usuario.rol);
+      await prefs.setString('alergias', usuario.alergias);
+      await prefs.setString('tipodeSangre', usuario.sangre);
+      await prefs.setString('factorRh', usuario.factor);
+      await prefs.setString('chapadeGuerra', usuario.chapa);
 
       Navigator.pushReplacement(
           context,
@@ -214,11 +226,10 @@ class RegisterPage extends StatelessWidget {
                             ),
                           );
 
-                          User usuario =await login();
+                          User usuario = await login();
 
                           if (usuario !=
-                                  User("firstName", "lastName", "password",
-                                      "email", "rol") ||
+                                  User("firstName", "lastNameF", "lastNameM", "password", "email", "rol", "alergias", "sangre", "factor", "chapa") ||
                               usuario.password == passwordController.text) {
                             guardar(usuario);
                           }

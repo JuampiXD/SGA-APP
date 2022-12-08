@@ -3,14 +3,14 @@ import "package:graphql_flutter/graphql_flutter.dart";
 
 class GraphQLConfiguration {
 
-  static const String _host = '161.97.151.134:8070';
+  static const String _host = 'notascolmilav.com/sga';
 
   static String getHost() {
-    return "http://$_host";
+    return "https://$_host";
   }
 
   static HttpLink httpLink = HttpLink(
-    "http://$_host/graphql",
+    "https://$_host/graphql",
   );
 
   static AuthLink authLink = AuthLink(

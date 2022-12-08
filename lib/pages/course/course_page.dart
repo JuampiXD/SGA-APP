@@ -87,7 +87,7 @@ class _CoursePageState extends State<CoursePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "${resultado.classmates.elementAt(index).firstName} ${resultado.classmates.elementAt(index).lastName}",
+                                  "${resultado.classmates.elementAt(index).firstName} ${resultado.classmates.elementAt(index).lastNameF}",
                                   textScaleFactor: 1.3,
                                   style:
                                       const TextStyle(fontFamily: "RobotoBold"),
@@ -96,7 +96,7 @@ class _CoursePageState extends State<CoursePage> {
                                   height: 1.h,
                                 ),
                                 Text(
-                                    resultado.classmates.elementAt(index).email,
+                                    resultado.classmates.elementAt(index).lastNameM,
                                     style: const TextStyle(
                                         fontFamily: "RobotoItalic"))
                               ],
