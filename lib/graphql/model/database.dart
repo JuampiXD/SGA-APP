@@ -4,11 +4,12 @@ import 'objetos.dart';
 class DataBase {
   Course getCourse(QueryResult result) {
     Course resultado = Course("", "", "", []);
-    resultado.name = result.data!["courses"]["data"][0]["attributes"]["name"];
-    resultado.career =
-        result.data!["courses"]["data"][0]["attributes"]["career"];
-    resultado.semester =
-        result.data!["courses"]["data"][0]["attributes"]["semester"];
+    resultado.compania =
+        result.data!["courses"]["data"][0]["attributes"]["compania"];
+    resultado.seccion =
+        result.data!["courses"]["data"][0]["attributes"]["seccion"];
+    resultado.numPatrulla =
+        result.data!["courses"]["data"][0]["attributes"]["numPatrulla"];
 
     List data =
         result.data!["courses"]["data"][0]["attributes"]["usuarios"]["data"];
@@ -16,8 +17,9 @@ class DataBase {
     for (var element in data) {
       resultado.classmates.add(Classmate(
         element["attributes"]["firstName"],
-        element["attributes"]["lastName"],
-        element["attributes"]["email"],
+        element["attributes"]["lastNameF"],
+        element["attributes"]["lastNameM"],
+        element["attributes"]["chapadeGuerra"],
       ));
     }
 
@@ -47,6 +49,7 @@ class DataBase {
       resultado.add(Assitance(
           element["attributes"]["name"],
           element["attributes"]["date"],
+          element["attributes"]["status"],
           detailsFormat(element["attributes"]["asistencia"])));
     }
 
@@ -69,13 +72,7 @@ class DataBase {
           element["attributes"]["alergias"],
           element["attributes"]["tipodeSangre"],
           element["attributes"]["factorRh"],
-
-
-          element["attributes"]["chapadeGuerra"]
-
-
-
-      ));
+          element["attributes"]["chapadeGuerra"]));
     }
 
     return resultado.first;

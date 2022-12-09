@@ -25,7 +25,8 @@ class _CoursePageState extends State<CoursePage> {
       client: GraphQLConfiguration.clientToQuery(),
       child: Query(
           options: QueryOptions(
-              document: gql(QueryCollections().getClassmates(widget.Usuario.email))),
+              document:
+                  gql(QueryCollections().getClassmates(widget.Usuario.email))),
           builder: (QueryResult result, {refetch, fetchMore}) {
             if (result.hasException) {
               return const Fail_Connection(
@@ -45,7 +46,6 @@ class _CoursePageState extends State<CoursePage> {
             return Column(
               children: [
                 Container(
-
                     width: 100.w,
                     padding: EdgeInsets.symmetric(horizontal: 6.w),
                     color: const Color(0xffDFD2C6),
@@ -56,12 +56,18 @@ class _CoursePageState extends State<CoursePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            resultado.name.toUpperCase(),
+                            resultado.compania
+                                .toUpperCase()
+                                .replaceAll('_', '-'),
                             textScaleFactor: 2,
                             style: const TextStyle(fontFamily: "RobotoBold"),
                           ),
                           Text(
-                            resultado.career.replaceAll("_", " "),
+                            "${resultado.seccion} sección",
+                            textScaleFactor: 1.2,
+                          ),
+                          Text(
+                            "${resultado.numPatrulla} patrulla",
                             textScaleFactor: 1.2,
                           ),
                         ],
@@ -87,7 +93,7 @@ class _CoursePageState extends State<CoursePage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "${resultado.classmates.elementAt(index).firstName} ${resultado.classmates.elementAt(index).lastNameF}",
+                                  "${resultado.classmates.elementAt(index).firstName} ${resultado.classmates.elementAt(index).lastNameF} ${resultado.classmates.elementAt(index).lastNameM}",
                                   textScaleFactor: 1.3,
                                   style:
                                       const TextStyle(fontFamily: "RobotoBold"),
@@ -96,7 +102,9 @@ class _CoursePageState extends State<CoursePage> {
                                   height: 1.h,
                                 ),
                                 Text(
-                                    resultado.classmates.elementAt(index).lastNameM,
+                                    resultado.classmates
+                                        .elementAt(index)
+                                        .chapadeGuerra,
                                     style: const TextStyle(
                                         fontFamily: "RobotoItalic"))
                               ],

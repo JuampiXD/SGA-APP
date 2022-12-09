@@ -1,32 +1,33 @@
-
-
 class Course {
-  Course(this.name, this.career,this.semester,this.classmates);
+  Course(this.compania, this.seccion, this.numPatrulla, this.classmates);
 
-   String name;
-   String career;
-   String semester;
-   List<Classmate> classmates;
+  String compania;
+  String seccion;
+  String numPatrulla;
+  List<Classmate> classmates;
 }
 
 class Classmate {
-  Classmate(this.firstName,  this.lastNameF,this.lastNameM);
+  Classmate(this.firstName, this.lastNameF, this.lastNameM, this.chapadeGuerra);
 
   final String firstName;
   final String lastNameF;
   final String lastNameM;
+  final String chapadeGuerra;
 }
 
 class Assitance {
-  Assitance(this.name, this.date,this.detailsAssistance);
+  Assitance(this.name, this.date, this.status, this.detailsAssistance);
 
   final String name;
   final String date;
+  final bool status;
   final List<DetailsAssitance> detailsAssistance;
 }
 
 class DetailsAssitance {
-  DetailsAssitance(this.firstName, this.lastNameF,this.lastNameM,this.details);
+  DetailsAssitance(
+      this.firstName, this.lastNameF, this.lastNameM, this.details);
 
   final String firstName;
   final String lastNameF;
@@ -35,9 +36,19 @@ class DetailsAssitance {
 }
 
 class User {
-  User(this.firstName, this.lastNameF,this.lastNameM,this.password,this.email,this.rol,this.alergias,this.sangre,this.factor,this.chapa);
+  User(
+      this.firstName,
+      this.lastNameF,
+      this.lastNameM,
+      this.password,
+      this.email,
+      this.rol,
+      this.alergias,
+      this.sangre,
+      this.factor,
+      this.chapa);
   final String firstName;
-  final  String lastNameF;
+  final String lastNameF;
   final String lastNameM;
   final String password;
   final String email;
@@ -47,11 +58,3 @@ class User {
   final String factor;
   final String chapa;
 }
-
-
-
-
-
-
-
-
