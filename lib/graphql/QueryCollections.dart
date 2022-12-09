@@ -26,7 +26,7 @@ query {
   """;
   }
 
-  String getInfoUsers(String email) {
+  String getInfoUsers(String email,String compania,String seccion,String patrulla) {
     return """ 
 query {
   assistances(
@@ -41,7 +41,17 @@ query {
         name
         date
         status
-        asistencia {
+          asistencia(
+          filters: {
+            usuario: {
+              patrulla: {
+                compania: { eq: "$compania" }
+                seccion: { eq: "$seccion" }
+                numPatrulla: { eq: "$patrulla" }
+              }
+            }
+          }
+        ){
           detalle
           usuario {
             data {
@@ -71,6 +81,15 @@ query {
         tipodeSangre
         factorRh
         chapadeGuerra
+          patrulla {
+          data {
+            attributes {
+              compania
+              seccion
+              numPatrulla
+            }
+          }
+        }
       }
     }
   }

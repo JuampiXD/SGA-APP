@@ -31,9 +31,10 @@ class _AssistancePageState extends State<AssistancePage> {
       child: Query(
           options: QueryOptions(
               document:
-                  gql(QueryCollections().getInfoUsers(widget.usuario.email))),
+                  gql(QueryCollections().getInfoUsers(widget.usuario.email,widget.usuario.compania,widget.usuario.seccion,widget.usuario.patrulla))),
           builder: (QueryResult result, {refetch, fetchMore}) {
             if (result.hasException) {
+              print(result);
               return const Fail_Connection(
                 descriptions: "No hay conexión a Internet",
               );

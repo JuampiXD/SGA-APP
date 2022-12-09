@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
-
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -79,10 +77,10 @@ class _ListPageState extends State<ListPage> {
                 'PUT',
                 Uri.parse(
                     'http://161.97.151.134:8070/api/assistances/${widget.resultado.id}'));
-            request.body = json.encode(result);
-
-            request.headers.addAll(headers);
+            request.body = result;
             print(request.body);
+            request.headers.addAll(headers);
+
             http.StreamedResponse response = await request.send();
 
             if (response.statusCode == 200) {

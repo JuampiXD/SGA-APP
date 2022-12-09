@@ -35,7 +35,7 @@ class RegisterPage extends StatelessWidget {
       var request = http.Request(
           'GET',
           Uri.parse(
-              '${GraphQLConfiguration.getHost()}/api/usuarios?filters[email]['
+              '${GraphQLConfiguration.getHost()}/api/usuarios?populate=*&filters[email]['
                       r'$eq]=' +
                   emailController.text));
 
@@ -44,7 +44,7 @@ class RegisterPage extends StatelessWidget {
 
       http.StreamedResponse response = await request.send();
       User usuario = User("firstName", "lastNameF", "lastNameM", "password",
-          "email", "rol", "alergias", "sangre", "factor", "chapa");
+          "email", "rol", "alergias", "sangre", "factor", "chapa","compania","seccion","numPatrulla");
       if (response.statusCode == 200) {
 
         String x = "";
@@ -60,7 +60,10 @@ class RegisterPage extends StatelessWidget {
             jsonDecode(x)["data"][0]["attributes"]["alergias"],
             jsonDecode(x)["data"][0]["attributes"]["tipodeSangre"],
             jsonDecode(x)["data"][0]["attributes"]["factorRh"],
-            jsonDecode(x)["data"][0]["attributes"]["chapadeGuerra"] );
+            jsonDecode(x)["data"][0]["attributes"]["chapadeGuerra"],
+            jsonDecode(x)["data"][0]["attributes"]["patrulla"]["data"]["attributes"]["compania"],
+            jsonDecode(x)["data"][0]["attributes"]["patrulla"]["data"]["attributes"]["seccion"],
+            jsonDecode(x)["data"][0]["attributes"]["patrulla"]["data"]["attributes"]["numPatrulla"]);
 
 
       }
@@ -80,6 +83,9 @@ class RegisterPage extends StatelessWidget {
       await prefs.setString('tipodeSangre', usuario.sangre);
       await prefs.setString('factorRh', usuario.factor);
       await prefs.setString('chapadeGuerra', usuario.chapa);
+      await prefs.setString('compania', usuario.compania);
+      await prefs.setString('seccion', usuario.seccion);
+      await prefs.setString('numPatrulla', usuario.patrulla);
 
       Navigator.pushReplacement(
           context,
@@ -229,7 +235,8 @@ class RegisterPage extends StatelessWidget {
                           User usuario = await login();
 
                           if (usuario !=
-                                  User("firstName", "lastNameF", "lastNameM", "password", "email", "rol", "alergias", "sangre", "factor", "chapa") ||
+                              User("firstName", "lastNameF", "lastNameM", "password",
+                                  "email", "rol", "alergias", "sangre", "factor", "chapa","compania","seccion","numPatrulla")||
                               usuario.password == passwordController.text) {
                             guardar(usuario);
                           }

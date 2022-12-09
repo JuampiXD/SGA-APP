@@ -46,7 +46,10 @@ class User {
       this.alergias,
       this.sangre,
       this.factor,
-      this.chapa);
+      this.chapa,
+      this.compania,
+      this.seccion,
+      this.patrulla);
   final String firstName;
   final String lastNameF;
   final String lastNameM;
@@ -57,4 +60,7 @@ class User {
   final String sangre;
   final String factor;
   final String chapa;
+  final String compania;
+  final String seccion;
+  final String patrulla;
 }

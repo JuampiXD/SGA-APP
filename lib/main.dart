@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
         home: Sizer(builder: (context, orientation, deviceType) {
           return GraphQLProvider(
               client: GraphQLConfiguration.clientToQuery(),
-              child: SplashPage());
+              child: RegisterPage ());
         }));
   }
 }

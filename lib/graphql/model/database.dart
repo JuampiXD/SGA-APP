@@ -74,7 +74,10 @@ class DataBase {
           element["attributes"]["alergias"],
           element["attributes"]["tipodeSangre"],
           element["attributes"]["factorRh"],
-          element["attributes"]["chapadeGuerra"]));
+          element["attributes"]["chapadeGuerra"],
+          element["attributes"]["patrulla"]["data"]["attributes"]["compania"],
+          element["attributes"]["patrulla"]["data"]["attributes"]["seccion"],
+          element["attributes"]["patrulla"]["data"]["attributes"]["numPatrulla"]));
     }
 
     return resultado.first;

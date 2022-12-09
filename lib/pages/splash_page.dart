@@ -58,6 +58,9 @@ class _SplashPageState extends State<SplashPage> {
         prefs.getString('tipodeSangre') ?? "No",
         prefs.getString('factorRh') ?? "No",
         prefs.getString('chapadeGuerra') ?? "No",
+        prefs.getString('compania') ?? "No",
+        prefs.getString('seccion') ?? "No",
+        prefs.getString('numPatrulla') ?? "No",
       );
     });
 
