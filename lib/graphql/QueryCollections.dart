@@ -1,7 +1,7 @@
 class QueryCollections {
   String getClassmates(String email) {
     return """ 
-  query {
+query {
   courses   (filters: { usuarios: {email:{eq: "$email" }} }){
     data {
       attributes {
@@ -35,7 +35,9 @@ query {
     }
   ) {
     data {
+      id
       attributes {
+        
         name
         date
         status
@@ -43,6 +45,7 @@ query {
           detalle
           usuario {
             data {
+              id
               attributes {
                 firstName
                 lastNameF

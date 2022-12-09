@@ -22,7 +22,7 @@ void main() async {
   );
 }
 
- //  Color Arena  FEF8E6
+//  Color Arena  FEF8E6
 //  Color Arena Oscuro  DFD2C6
 //  Color Vino  45152A
 
@@ -51,8 +51,6 @@ void main() async {
 // #f4e4d4
 // #fcf4dc
 
-
-
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -74,13 +72,9 @@ class _MyAppState extends State<MyApp> {
         ),
         debugShowCheckedModeBanner: false,
         home: Sizer(builder: (context, orientation, deviceType) {
-
           return GraphQLProvider(
               client: GraphQLConfiguration.clientToQuery(),
-              child:
-               RegisterPage()
-
-          );
+              child: SplashPage());
         }));
   }
 }

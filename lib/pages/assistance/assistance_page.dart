@@ -2,7 +2,7 @@ import 'package:accordion/accordion.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:sga/graphql/model/objetos.dart';
-import 'package:sga/pages/assistance/accordion_editable.dart';
+import 'package:sga/pages/assistance/assistance_admin_page.dart';
 import 'package:sga/pages/assistance/profile_page.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';

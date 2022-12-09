@@ -32,6 +32,7 @@ class DataBase {
 
       for (var element in element) {
         resultado.add(DetailsAssitance(
+            element["usuario"]["data"]["id"],
             element["usuario"]["data"]["attributes"]["firstName"],
             element["usuario"]["data"]["attributes"]["lastNameF"],
             element["usuario"]["data"]["attributes"]["lastNameM"],
@@ -47,6 +48,7 @@ class DataBase {
 
     for (var element in data) {
       resultado.add(Assitance(
+          element["id"],
           element["attributes"]["name"],
           element["attributes"]["date"],
           element["attributes"]["status"],

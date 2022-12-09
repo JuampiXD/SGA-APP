@@ -17,8 +17,8 @@ class Classmate {
 }
 
 class Assitance {
-  Assitance(this.name, this.date, this.status, this.detailsAssistance);
-
+  Assitance(this.id, this.name, this.date, this.status, this.detailsAssistance);
+  final String id;
   final String name;
   final String date;
   final bool status;
@@ -27,8 +27,8 @@ class Assitance {
 
 class DetailsAssitance {
   DetailsAssitance(
-      this.firstName, this.lastNameF, this.lastNameM, this.details);
-
+      this.id, this.firstName, this.lastNameF, this.lastNameM, this.details);
+  final String id;
   final String firstName;
   final String lastNameF;
   final String lastNameM;
